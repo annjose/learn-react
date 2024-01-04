@@ -13,13 +13,21 @@ export default function Board() {
   
   const [squareValues, setSquareValues] = useState(Array(9).fill(null));
 
+  const player = {
+    X: 'X',
+    O: 'O'
+  }
+  const [currentPlayer, setCurrentPlayer] = useState(player.X);
+
   function handleSquareClick(i) {
-    console.log(`handleSquareClick with value ${i}`);
+    console.log(`handleSquareClick with value ${i}. currentPlayer = ${currentPlayer}`);
 
     // create a copy of squareValues (instead of mutating it in place)
     const newSquareValues = squareValues.splice(0);
-    newSquareValues[i] = 'X';
-    setSquareValues(newSquareValues);  
+    newSquareValues[i] = currentPlayer;
+    setSquareValues(newSquareValues);
+
+    setCurrentPlayer(currentPlayer == player.X ? player.O : player.X);
   }
 
   return (
