@@ -22,6 +22,9 @@ export default function Board() {
   function handleSquareClick(i) {
     console.log(`handleSquareClick with value ${i}. currentPlayer = ${currentPlayer}`);
 
+    if(squareValues[i] != null) {
+      return;
+    }
     // create a copy of squareValues (instead of mutating it in place)
     const newSquareValues = squareValues.splice(0);
     newSquareValues[i] = currentPlayer;
