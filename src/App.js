@@ -9,18 +9,11 @@ function Square({ value, handleClick }) {  /* The curly braces surrounding the p
   );
 }
 
-export default function Board() {
-
-  const [squareValues, setSquareValues] = useState(Array(9).fill(null));
-
-  const player = {
-    X: 'X',
-    O: 'O'
-  }
-  const [currentPlayer, setCurrentPlayer] = useState(player.X);
+function Board({ currentPlayer, squareValues, onEndOfTurn }) {
 
   function handleSquareClick(i) {
-    console.log(`handleSquareClick with value ${i}. currentPlayer = ${currentPlayer}`);
+
+    console.log(`handleSquareClick with value ${i}. currentPlayer = ${currentPlayer}. squareValues = ${squareValues}`);
 
     // if a square already has a value or a winner is already found, return immediately
     if (squareValues[i] || calculateWinner(squareValues)) {
@@ -31,13 +24,12 @@ export default function Board() {
     // create a copy of squareValues (instead of mutating it in place)
     const newSquareValues = squareValues.splice(0);
     newSquareValues[i] = currentPlayer;
-    setSquareValues(newSquareValues);
 
-    setCurrentPlayer(currentPlayer == player.X ? player.O : player.X);
+    onEndOfTurn(newSquareValues);
   }
 
   const winner = calculateWinner(squareValues);
-  let status = winner ? 
+  let status = winner ?
     `Game over! Winner: ${winner}!` :
     `Next turn for player: ${currentPlayer}`;
 
@@ -83,4 +75,34 @@ export default function Board() {
     return null;
   }
 
+}
+
+export default function Game() {
+
+  const initialHistory = [Array(9).fill(null)];     // history is an array of arrays
+  const [history, setHistory] = useState(initialHistory);
+
+  const squareValues = history[history.length - 1];
+
+  const player = {
+    X: 'X',
+    O: 'O'
+  }
+  const [currentPlayer, setCurrentPlayer] = useState(player.X);
+
+  function handleEndOfTurn(newSquareValues) {
+    console.log(`in handleEndOfTurn. newSquareValues = ${newSquareValues}`);
+
+    setHistory([...history, newSquareValues]);
+    setCurrentPlayer(currentPlayer == player.X ? player.O : player.X);
+
+  }
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board currentPlayer={currentPlayer} squareValues={squareValues} onEndOfTurn={handleEndOfTurn} />
+      </div>
+    </div>
+  );
 }
