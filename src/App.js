@@ -11,6 +11,8 @@ function Square({ value, handleClick }) {  /* The curly braces surrounding the p
 
 function Board({ currentPlayer, squareValues, onEndOfTurn }) {
 
+  console.log('Board loaded');
+
   function handleSquareClick(i) {
 
     console.log(`handleSquareClick with value ${i}. currentPlayer = ${currentPlayer}. squareValues = ${squareValues}`);
@@ -22,7 +24,7 @@ function Board({ currentPlayer, squareValues, onEndOfTurn }) {
     }
 
     // create a copy of squareValues (instead of mutating it in place)
-    const newSquareValues = squareValues.splice(0);
+    const newSquareValues = squareValues.slice(0);
     newSquareValues[i] = currentPlayer;
 
     onEndOfTurn(newSquareValues);
@@ -78,30 +80,65 @@ function Board({ currentPlayer, squareValues, onEndOfTurn }) {
 }
 
 export default function Game() {
-
+  
   const initialHistory = [Array(9).fill(null)];     // history is an array of arrays
-  const [history, setHistory] = useState(initialHistory);
+  const [history, setHistory] = useState(initialHistory); 
+  
+  const [currentTurn, setCurrentTurn] = useState(0);
 
-  const squareValues = history[history.length - 1];
-
+  // const squareValues = history[history.length - 1];
+  const squareValues = history[currentTurn];
+  
   const player = {
     X: 'X',
     O: 'O'
   }
   const [currentPlayer, setCurrentPlayer] = useState(player.X);
+  
+
+  console.log(`Game loaded. currentTurn = ${currentTurn}. history = ${history}. history[currentTurn] = ${history[currentTurn]}`);
 
   function handleEndOfTurn(newSquareValues) {
-    console.log(`in handleEndOfTurn. newSquareValues = ${newSquareValues}`);
+    console.log(`in handleEndOfTurn. newSquareValues = ${newSquareValues}. currentPlayer = ${currentPlayer}`);
 
-    setHistory([...history, newSquareValues]);
-    setCurrentPlayer(currentPlayer == player.X ? player.O : player.X);
+    // setHistory([...history, newSquareValues]);
+    const newHistory = [...history.slice(0, currentTurn + 1), newSquareValues];
+    setHistory(newHistory);
+    setCurrentTurn(newHistory.length - 1);
+
+    setCurrentPlayer(currentPlayer === player.X ? player.O : player.X);
 
   }
+
+  function playFromTurn(turnIndex) {
+    console.log(`playFromTurn(): turnIndex=${turnIndex}`);
+
+    setCurrentTurn(turnIndex);
+
+    // set current player to be the one that corresponds to the current turnIndex. 0 => PlayerX, 1 => is PlayerO, 2 => PlayerX etc.
+    setCurrentPlayer(turnIndex % 2 === 0 ? player.X : player.O);
+  }
+
+  const gameHistory = history.map((squareValues, turnIndex) => {
+
+    const description = turnIndex > 0 ? `${currentPlayer} finished turn ${turnIndex}` : 'Start Game';
+    const buttonText = turnIndex > 0 ? `Play this turn` : ``;
+    return (
+      <li key={turnIndex}>
+        <span>Turn #{turnIndex} values: {squareValues}</span>
+        <button onClick={() => { playFromTurn(turnIndex) }}> Go to turn #{turnIndex} </button>
+      </li>
+    );
+  });
 
   return (
     <div className="game">
       <div className="game-board">
         <Board currentPlayer={currentPlayer} squareValues={squareValues} onEndOfTurn={handleEndOfTurn} />
+      </div>
+      <div className="game-info">
+        Game History: <br />
+        {gameHistory}
       </div>
     </div>
   );
