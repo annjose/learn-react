@@ -88,7 +88,7 @@ export default function Game() {
 
   // const squareValues = history[history.length - 1];
   const squareValues = history[currentTurn];
-  
+
   const player = {
     X: 'X',
     O: 'O'
@@ -121,12 +121,13 @@ export default function Game() {
 
   const gameHistory = history.map((squareValues, turnIndex) => {
 
-    const description = turnIndex > 0 ? `${currentPlayer} finished turn ${turnIndex}` : 'Start Game';
-    const buttonText = turnIndex > 0 ? `Play this turn` : ``;
+    const description = `Turn #${turnIndex} values: ${squareValues.join(',')}`;
+    const buttonText = turnIndex == 0 ? `Go to start` : `Go to turn #${turnIndex}`;
+
     return (
       <li key={turnIndex}>
-        <span>Turn #{turnIndex} values: {squareValues}</span>
-        <button onClick={() => { playFromTurn(turnIndex) }}> Go to turn #{turnIndex} </button>
+        <span>{description}</span>
+        <button onClick={() => { playFromTurn(turnIndex) }}> {buttonText} </button>
       </li>
     );
   });
