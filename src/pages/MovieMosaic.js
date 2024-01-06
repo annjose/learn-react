@@ -39,13 +39,13 @@ export default function MovieMosaic() {
         fetchMovies(1);
     }, []);
 
-    let movieList = movies.map((movie) => {
+    const movieList = movies.map((movie) => {
 
         let movieOverview = <span>{movie['overview'].substring(0, 200) + '...'}</span>;
 
         return (
             <li key={movie['id']}>
-                <strong>{movie['title']}</strong> ({movie['release_date']}) | Rating: {Math.round(movie['vote_average'])}/10
+                <strong>{movie['title']}</strong> ({movie['release_date']}) | Rating: <strong>{ Math.round(movie['vote_average']) } /10</strong >
                 <ul><li key={movie['id'] + ':1'}>Overview: {movieOverview}</li></ul>
                 <p />
             </li>
@@ -64,16 +64,22 @@ export default function MovieMosaic() {
 
     let navbar = [];
 
-    navbar.push(<span>Page {currentPageNumber} of {totalPages}</span>);
-    navbar.push(<span className="separator">|</span>);
-
+    
     if (totalPages > 1) {
         if (currentPageNumber - 1 > 0) {
-            navbar.push(<span className="nav-prev"><a href="" onClick={(e) => { navigateNextPrev(e, 'prev') }}>Prev (Page#: {currentPageNumber - 1})</a></span>);
-            navbar.push(<span className="separator">|</span>);
+            navbar.push(<span className="nav-prev"><button onClick={(e) => { navigateNextPrev(e, 'prev') }}> &lt; &lt; Prev Page (#{currentPageNumber - 1})</button></span>);
+        } else {
+            navbar.push(<span className="nav-prev"><button disabled="disabled">&lt; &lt; Prev Page</button></span>);
         }
+        
+        navbar.push(<span className="separator">|</span>);
+        navbar.push(<span>You are on <strong>page #{currentPageNumber}</strong> of {totalPages}</span>);
+        navbar.push(<span className="separator">|</span>);
+        
         if (currentPageNumber < totalPages) {
-            navbar.push(<span className="nav-next"><a href="" onClick={(e) => { navigateNextPrev(e, 'next') }}>Next (Page#: {currentPageNumber + 1})</a></span>);
+            navbar.push(<span className="nav-next"><button onClick={(e) => { navigateNextPrev(e, 'next') }}> &gt; &gt; Next Page (#{currentPageNumber + 1}) </button></span>);
+        } else {
+            navbar.push(<span className="nav-next"><button disabled="disabled">&lt; &lt; Next Page</button></span>);
         }
     }
 
