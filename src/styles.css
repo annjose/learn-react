@@ -81,6 +81,7 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .game {
   display: flex;
   flex-direction: row;
@@ -88,4 +89,19 @@ body {
 
 .game-info {
   margin-left: 20px;
+}
+
+/* Movie Mosaic styles */
+.separator {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+.nav-prev {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.nav-next {
+  margin-left: 24px;
+  margin-right: 24px;
 }
