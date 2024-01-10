@@ -7,7 +7,7 @@ export default function MovieMosaic() {
     const [totalPages, setTotalPages] = useState(0);
 
     const baseUrl = 'https://api.themoviedb.org/3';
-    const apiToken = 'YOUR_API_TOKEN';
+    const apiToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTAyZWE3NGEzNDViYWFmMzdiYTQ5ZTE3OTgxODcxNiIsInN1YiI6IjY1OTRmODY3MzI2ZWMxN2IyMzA2YzFkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xlYBO2qeHceRQAVPgr2ASMDg3A20Zc4i7S-lDHaI8TM';
     const options = {
         method: 'GET',
         headers: {
@@ -45,8 +45,12 @@ export default function MovieMosaic() {
 
         return (
             <li key={movie['id']}>
-                <strong>{movie['title']}</strong> ({movie['release_date']}) | Rating: <strong>{ Math.round(movie['vote_average']) } /10</strong >
-                <ul><li key={movie['id'] + ':1'}>Overview: {movieOverview}</li></ul>
+                <strong>{movie['title']}</strong> ({movie['release_date']}) | Rating: <strong>{Math.round(movie['vote_average'])} /10</strong >
+                <ul>
+                    <li key={movie['id'] + ':1'}>
+                        Overview: {movieOverview}
+                    </li>
+                </ul>
                 <p />
             </li>
         );
@@ -61,27 +65,34 @@ export default function MovieMosaic() {
         fetchMovies(pageNumber);
     }
 
+    /* Construct the Next and Prev buttons - use three JSX techniques for demo purpose
+        1. using conditional if-else and embed markup in between
+        2. sequence of markups or JSX variables
+        3. using ternary operation ? :
+        Note the empty wrappers <> </> - these are important to tell React that it is the beginning of JSX and there is only one root
+    */
 
-    let navbar = [];
-
-    
-    if (totalPages > 1) {
-        if (currentPageNumber - 1 > 0) {
-            navbar.push(<span className="nav-prev"><button onClick={(e) => { navigateNextPrev(e, 'prev') }}> &lt; &lt; Prev Page (#{currentPageNumber - 1})</button></span>);
-        } else {
-            navbar.push(<span className="nav-prev"><button disabled="disabled">&lt; &lt; Prev Page</button></span>);
-        }
-        
-        navbar.push(<span className="separator">|</span>);
-        navbar.push(<span>You are on <strong>page #{currentPageNumber}</strong> of {totalPages}</span>);
-        navbar.push(<span className="separator">|</span>);
-        
-        if (currentPageNumber < totalPages) {
-            navbar.push(<span className="nav-next"><button onClick={(e) => { navigateNextPrev(e, 'next') }}> &gt; &gt; Next Page (#{currentPageNumber + 1}) </button></span>);
-        } else {
-            navbar.push(<span className="nav-next"><button disabled="disabled">&lt; &lt; Next Page</button></span>);
-        }
+    let PrevButton;
+    if (currentPageNumber - 1 > 0) {
+        PrevButton = <span className="nav-prev"><button onClick={(e) => { navigateNextPrev(e, 'prev') }}> &lt; &lt; Prev Page (#{currentPageNumber - 1})</button></span>
+    } else {
+        PrevButton = <span className="nav-prev"><button disabled="disabled">&lt; &lt; Prev Page</button></span>
     }
+
+    let nextPrevPanel =
+        <>
+            {PrevButton}
+
+            <span className="separator">|</span>
+            <span>You are on <strong>page #{currentPageNumber}</strong> of {totalPages}</span>
+            <span className="separator">|</span>
+
+            {currentPageNumber < totalPages ? (
+                <span className="nav-next"><button onClick={(e) => { navigateNextPrev(e, 'next') }}> &gt; &gt; Next Page (#{currentPageNumber + 1}) </button></span>
+            ) : (
+                <span className="nav-next"><button disabled="disabled">&lt; &lt; Next Page</button></span>
+            )}
+        </>
 
     return (
         <>
@@ -91,11 +102,9 @@ export default function MovieMosaic() {
             <p />
 
             <h2>Top Rated Movies</h2>
-            {navbar}
+            {nextPrevPanel}
 
-            <div>
-                <ul>{movieList}</ul>
-            </div>
+            <ul>{movieList}</ul>
         </>
     );
 }
