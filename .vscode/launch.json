@@ -1,0 +1,17 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Launch Microsoft Edge against localhost",
+            "url": "http://localhost:3000",
+            // Uncomment one of the two lines below to debug the main app vs. globomantics app
+            // "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/app-plural-globomantics"
+        }
+    ]
+}
