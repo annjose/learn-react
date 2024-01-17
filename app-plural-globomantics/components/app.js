@@ -1,7 +1,11 @@
 import Banner from "/components/banner";
 
 const App = () => {
-    return <Banner title="Provides houses all over the world."/>
+    return (
+        <Banner>
+            <strong>Provides houses all over the world.</strong>
+        </Banner>
+    );
 }
 
 export default App;
