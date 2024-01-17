@@ -1,3 +1,4 @@
+import HouseRow from "./houseRow";
 
 const houses = [
     { id: 101, address: '123 Marvel Street', location: 'San Jose', price: 900000 },
@@ -5,18 +6,7 @@ const houses = [
     { id: 103, address: '222 Century Dr', location: 'Redmond', price: 890000 }
 ];
 
-// In the props below, notice the {} that is enclosing the house prop. It is important, otherwise house will be undefined and the rows will be empty.
-const HouseRow = ({ house }) => {
-    return (
-        <tr>
-            <td>{house.address}</td>
-            <td>{house.location}</td>
-            <td>{house.price}</td>
-        </tr>
-    );
-};
-
-const Houses = () => {
+const HouseList = () => {
     return (
         <>
             <div className="row mb-2">
@@ -41,4 +31,4 @@ const Houses = () => {
     );
 };
 
-export default Houses;
+export default HouseList;

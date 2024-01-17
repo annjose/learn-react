@@ -1,4 +1,4 @@
-import Houses from "./houses";
+import HouseList from "./houseList";
 import Banner from "/components/banner";
 
 const App = () => {
@@ -7,7 +7,7 @@ const App = () => {
             <Banner>
                 <div>Provides houses all over the world</div>
             </Banner>
-            <Houses />
+            <HouseList />
         </>
     );
 }
