@@ -5,6 +5,17 @@ const houses = [
     { id: 103, address: '222 Century Dr', location: 'Redmond', price: 890000 }
 ];
 
+// In the props below, notice the {} that is enclosing the house prop. It is important, otherwise house will be undefined and the rows will be empty.
+const HouseRow = ({ house }) => {
+    return (
+        <tr>
+            <td>{house.address}</td>
+            <td>{house.location}</td>
+            <td>{house.price}</td>
+        </tr>
+    );
+};
+
 const Houses = () => {
     return (
         <>
@@ -21,11 +32,8 @@ const Houses = () => {
                 </thead>
                 <tbody>
                     {houses.map((house) => (
-                        <tr key={house.id}>
-                            <td>{house.address}</td>
-                            <td>{house.location}</td>
-                            <td>{house.price}</td>
-                        </tr>
+                        // Note that the key prop is set on the HouseRow instead of on the <tr> inside HouseRow
+                        <HouseRow key={house.id} house={house} />
                     ))}
                 </tbody>
             </table>
