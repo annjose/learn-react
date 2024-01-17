@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is the app that is built along with the PluralSight course React-18 Fundamentals. The original project was created using NextJS [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). But after that, the app uses only standard React features.
 
-## Getting Started
+## Run the app
 
 First, run the development server:
 
@@ -24,14 +24,12 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Debug the app
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Open the repo in VS Code or IDE of your choice.
+2. Run the development server as described above.
+3. Launch the debug command, for example `F5` in VS Code. It will read the debug config from `launch.json` and launch the debugger.
+4. Now you can step over, in and out of the debugging session.
 
 ## Deploy on Vercel
 
