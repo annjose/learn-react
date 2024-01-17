@@ -1,8 +1,8 @@
 
 const houses = [
-    { address: '123 Marvel Street', location: 'San Jose', price: 900000 },
-    { address: '456 Disney Way', location: 'Cupertino', price: 1200000 },
-    { address: '222 Century Dr', location: 'Redmond', price: 890000 }
+    { id: 101, address: '123 Marvel Street', location: 'San Jose', price: 900000 },
+    { id: 102, address: '456 Disney Way', location: 'Cupertino', price: 1200000 },
+    { id: 103, address: '222 Century Dr', location: 'Redmond', price: 890000 }
 ];
 
 const Houses = () => {
@@ -21,7 +21,7 @@ const Houses = () => {
                 </thead>
                 <tbody>
                     {houses.map((house) => (
-                        <tr>
+                        <tr key={house.id}>
                             <td>{house.address}</td>
                             <td>{house.location}</td>
                             <td>{house.price}</td>
