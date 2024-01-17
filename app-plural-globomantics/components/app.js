@@ -5,7 +5,7 @@ const App = () => {
     return (
         <>
             <Banner>
-                <strong>Provides houses all over the world.</strong>
+                <div>Provides houses all over the world</div>
             </Banner>
             <Houses />
         </>

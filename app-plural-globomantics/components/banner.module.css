@@ -1,3 +1,8 @@
 .logo {
     height: 150px;
 }
+
+.title {
+    font-style: italic;
+    font-size: 1.5em;
+}

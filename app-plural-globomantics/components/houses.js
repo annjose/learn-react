@@ -8,8 +8,10 @@ const houses = [
 const Houses = () => {
     return (
         <>
-            <div>Houses currently on the market</div>
-            <table>
+            <div className="row mb-2">
+                <h5 className="theme-color text-center">Houses currently on the market</h5>
+            </div>
+            <table className="table table-hover">
                 <thead>
                     <tr>
                         <th>Address</th>
