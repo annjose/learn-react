@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HouseRow from "./houseRow";
-
-const initialHouses = [
-    { id: 101, address: '123 Marvel Street', location: 'San Jose', price: 900000 },
-    { id: 102, address: '456 Disney Way', location: 'Cupertino', price: 1200000 },
-    { id: 103, address: '222 Century Dr', location: 'Redmond', price: 890000 }
-];
 
 const HouseList = () => {
 
-    const [houses, setHouses] = useState(initialHouses);
+    const [houses, setHouses] = useState([]);
+
+    useEffect(() => {
+        const fetchHouses = async () => {
+            const response = await fetch("api/houses");
+            const houses = await response.json();
+            setHouses(houses);
+        }
+
+        fetchHouses();
+    }, []);
 
     const addHouse = () => {
         const newHouse = { id: 104, address: '777 Paramount Ct', location: 'New York', price: 1340800 }
