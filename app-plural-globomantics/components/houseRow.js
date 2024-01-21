@@ -7,11 +7,22 @@ const currencyFormatter = Intl.NumberFormat("en-US", {
 });
 
 const HouseRow = ({ house }) => {
+    /*let priceTd;
+    if (house.price >= 1_000_000) {
+        priceTd = <td className="text-primary">{currencyFormatter.format((house.price))}</td>
+    } else {
+        priceTd = <td>{currencyFormatter.format((house.price))}</td>
+    }*/
+
     return (
         <tr>
             <td>{house.address}</td>
             <td>{house.location}</td>
-            <td>{currencyFormatter.format((house.price))}</td>
+            {/* {priceTd} */}
+
+            { house.price &&
+                <td className={`${house.price >= 1_000_000 ? "text-primary" : ""}`}>{currencyFormatter.format((house.price))}</td>
+            }
         </tr>
     );
 };
