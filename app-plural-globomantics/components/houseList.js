@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HouseRow from "./houseRow";
 
-const HouseList = () => {
+const HouseList = ({ setCurrentHouse }) => {
 
     const [houses, setHouses] = useState([]);
 
@@ -37,7 +37,7 @@ const HouseList = () => {
                 <tbody>
                     {houses.map((house) => (
                         // Note that the key prop is set on the HouseRow instead of on the <tr> inside HouseRow
-                        <HouseRow key={house.id} house={house} />
+                        <HouseRow key={house.id} house={house} setCurrentHouse={setCurrentHouse} />
                     ))}
                 </tbody>
             </table>

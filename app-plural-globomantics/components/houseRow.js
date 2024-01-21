@@ -1,12 +1,8 @@
+import currencyFormatter from "@/utils/currencyFormatter";
+
 // In the props below, notice the {} that is enclosing the house prop. It is important, otherwise house will be undefined and the rows will be empty.
 
-const currencyFormatter = Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-});
-
-const HouseRow = ({ house }) => {
+const HouseRow = ({ house, setCurrentHouse }) => {
     /*let priceTd;
     if (house.price >= 1_000_000) {
         priceTd = <td className="text-primary">{currencyFormatter.format((house.price))}</td>
@@ -15,12 +11,12 @@ const HouseRow = ({ house }) => {
     }*/
 
     return (
-        <tr>
+        <tr onClick={() => setCurrentHouse(house)}>
             <td>{house.address}</td>
             <td>{house.location}</td>
             {/* {priceTd} */}
 
-            { house.price &&
+            {house.price &&
                 <td className={`${house.price >= 1_000_000 ? "text-primary" : ""}`}>{currencyFormatter.format((house.price))}</td>
             }
         </tr>
