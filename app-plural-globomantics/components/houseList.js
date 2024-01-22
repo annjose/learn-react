@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import HouseRow from "./houseRow";
+import { navContext } from "./app";
 
-const HouseList = ({ setCurrentHouse }) => {
+const HouseList = () => {
 
     const [houses, setHouses] = useState([]);
 
@@ -21,6 +22,9 @@ const HouseList = ({ setCurrentHouse }) => {
         setHouses([...houses, newHouse]);
     };
 
+    const currentTab = useContext(navContext);
+    console.log(`currentTab = ${currentTab}`);
+
     return (
         <>
             <div className="row mb-2">
@@ -37,7 +41,7 @@ const HouseList = ({ setCurrentHouse }) => {
                 <tbody>
                     {houses.map((house) => (
                         // Note that the key prop is set on the HouseRow instead of on the <tr> inside HouseRow
-                        <HouseRow key={house.id} house={house} setCurrentHouse={setCurrentHouse} />
+                        <HouseRow key={house.id} house={house} />
                     ))}
                 </tbody>
             </table>
