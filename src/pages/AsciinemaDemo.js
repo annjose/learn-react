@@ -9,14 +9,20 @@ const AsciinemaDemo = () => {
 
     useEffect(() => {
 
-        if(playerIsLoaded.current) {
+        if (playerIsLoaded.current) {
             console.log('useEffect called after loading player. Exiting useEffect now.')
             return;
         }
         const castFile = "/ann-demo.cast";
         const demoElement = document.getElementById('demo');
-
-        AsciinemaPlayer.create(castFile, demoElement);
+        const options = {
+            theme: 'dracula', markers: [
+                [15, 'create Readme'],
+                [26, 'save Readme'],
+                [38, 'git Add'],
+                [65, 'git push']
+  ] };
+        AsciinemaPlayer.create(castFile, demoElement, options);
 
         playerIsLoaded.current = true;
     }, []);
@@ -28,7 +34,7 @@ const AsciinemaDemo = () => {
             <p />
 
             <div>Asciinema playing a terminal session recorded on Ann's computer</div>
-            <div style={{ width: '800px' }}>
+            <div style={{ width: '1000px' }}>
                 <div id="demo"></div>
             </div>
         </>
