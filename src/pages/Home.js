@@ -21,6 +21,10 @@ export default function Home() {
                     <span><strong>Movie Mosaic</strong> - a simple movie browser -  </span>
                     <a href="/movie-mosaic">Open Movie Mosaic</a>
                 </li>
+                <li>
+                    <span><strong>Asciinema demo</strong> - a terminal session recorded using Asciinema - </span>
+                    <a href="/asciinema-demo">Asciinema demo</a>
+                </li>
             </ol>
         </>
     );
