@@ -16,12 +16,14 @@ const AsciinemaDemo = () => {
         const castFile = "/ann-demo.cast";
         const demoElement = document.getElementById('demo');
         const options = {
-            theme: 'dracula', markers: [
+            theme: 'dracula', 
+            markers: [
                 [15, 'create Readme'],
                 [26, 'save Readme'],
                 [38, 'git Add'],
                 [65, 'git push']
-  ] };
+            ]
+        };
         AsciinemaPlayer.create(castFile, demoElement, options);
 
         playerIsLoaded.current = true;
