@@ -22,9 +22,6 @@ const HouseList = () => {
         setHouses([...houses, newHouse]);
     };
 
-    const currentTab = useContext(navContext);
-    console.log(`currentTab = ${currentTab}`);
-
     return (
         <>
             <div className="row mb-2">
