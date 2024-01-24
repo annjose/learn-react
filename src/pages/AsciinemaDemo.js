@@ -1,11 +1,13 @@
 import * as AsciinemaPlayer from 'asciinema-player';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import 'asciinema-player/dist/bundle/asciinema-player.css';
 
 const AsciinemaDemo = () => {
 
     const playerIsLoaded = useRef(false);
+
+    const [keystrokes, setKeystrokes] = useState([]);
 
     useEffect(() => {
 
@@ -16,7 +18,6 @@ const AsciinemaDemo = () => {
         const castFile = "/ann-demo.cast";
         const demoElement = document.getElementById('demo');
         const options = {
-            theme: 'dracula', 
             markers: [
                 [15, 'create Readme'],
                 [26, 'save Readme'],
@@ -24,7 +25,29 @@ const AsciinemaDemo = () => {
                 [65, 'git push']
             ]
         };
-        AsciinemaPlayer.create(castFile, demoElement, options);
+        const player = AsciinemaPlayer.create(castFile, demoElement, options);
+
+        player.addEventListener('play', () => {
+            console.log('play!');
+        })
+
+        player.addEventListener('pause', () => {
+            console.log("paused!");
+        })
+
+        player.addEventListener('playing', () => {
+            console.log(`playing!`);
+        })
+
+        player.addEventListener('input', ({ data }) => {
+            const newInput = JSON.stringify(data);
+            console.log('new input!', newInput);
+
+            setKeystrokes((prevState) => {
+                console.log(`prevState=${prevState}`);
+                return [...prevState, newInput];
+            })
+        })
 
         playerIsLoaded.current = true;
     }, []);
@@ -36,7 +59,8 @@ const AsciinemaDemo = () => {
             <p />
 
             <div>Asciinema playing a terminal session recorded on Ann's computer</div>
-            <div style={{ width: '1000px' }}>
+
+            <div style={{ width: '928px', height: '670px' }}>
                 <div id="demo"></div>
             </div>
         </>
