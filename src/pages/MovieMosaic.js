@@ -7,7 +7,8 @@ export default function MovieMosaic() {
     const [totalPages, setTotalPages] = useState(0);
 
     const baseUrl = 'https://api.themoviedb.org/3';
-    const apiToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTAyZWE3NGEzNDViYWFmMzdiYTQ5ZTE3OTgxODcxNiIsInN1YiI6IjY1OTRmODY3MzI2ZWMxN2IyMzA2YzFkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xlYBO2qeHceRQAVPgr2ASMDg3A20Zc4i7S-lDHaI8TM';
+    const apiToken = process.env.REACT_APP_TOKEN;
+
     const options = {
         method: 'GET',
         headers: {
