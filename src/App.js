@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Game from './pages/Game';
 import MovieMosaic from './pages/MovieMosaic';
 import AsciinemaDemo from './pages/AsciinemaDemo'
+import HelixTutor from './pages/helix-tutor'
 
 export default function App() {
 
@@ -14,6 +15,7 @@ export default function App() {
         <Route path='game' element={<Game />} />
         <Route path='movie-mosaic' element={<MovieMosaic />} />
         <Route path='asciinema-demo' element={<AsciinemaDemo />} />
+        <Route path='helix-tutor' element={<HelixTutor />} />
       </Routes>
     </div>
   );

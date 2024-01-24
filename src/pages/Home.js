@@ -25,6 +25,10 @@ export default function Home() {
                     <span><strong>Asciinema demo</strong> - a terminal session recorded using Asciinema - </span>
                     <a href="/asciinema-demo">Asciinema demo</a>
                 </li>
+                <li>
+                    <span><strong>Helix Tutor</strong> - an easy way to learn how to use Helix - </span>
+                    <a href="/helix-tutor">Helix Tutor</a>
+                </li>
             </ol>
         </>
     );
