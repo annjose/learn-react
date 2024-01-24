@@ -22,17 +22,7 @@ const HelixTutor = () => {
             return;
         }
         const chPlayerElement = document.getElementById('ch-player');
-        const options = {
-            // pauseOnMarkers: true,
-            markers: [
-                [13, 'launch Helix'],
-                [16, 'select all file'],
-                [20, 'search for Helix'],
-                [25, 'convert to uppercase'],
-                [28, 'save file'],
-                [31, 'diff output'],
-            ]
-        };
+        const options = {};
         const player = AsciinemaPlayer.create(currentChallenge.castFile, chPlayerElement, options);
 
         player.addEventListener('play', () => {
@@ -52,7 +42,7 @@ const HelixTutor = () => {
             // console.log('new input!', newInput);
 
             setKeystrokes((prevState) => {
-                console.log(`prevState=${prevState}`);
+                // console.log(`prevState=${prevState}`);
                 return [...prevState, newInput];
             })
         })
