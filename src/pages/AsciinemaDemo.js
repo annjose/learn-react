@@ -15,8 +15,8 @@ const AsciinemaDemo = () => {
             console.log('useEffect called after loading player. Exiting useEffect now.')
             return;
         }
-        const castFile = "/ann-demo.cast";
-        const demoElement = document.getElementById('demo');
+        const castFile = "/ann-stdin.cast";
+        const demoElement = document.getElementById('my-player');
         const options = {
             markers: [
                 [15, 'create Readme'],
@@ -52,17 +52,33 @@ const AsciinemaDemo = () => {
         playerIsLoaded.current = true;
     }, []);
 
+    const Keystrokes = () => {
+        console.log(`keystrokes=${keystrokes}`);
+
+        return (
+            <>
+                <h2>Keystrokes</h2>
+                <ul>
+                    {keystrokes.map((keystroke) => (
+                        <li>{keystroke}</li>
+                    ))}
+                </ul>
+            </>
+        )
+    };
+
     return (
         <>
             <h1>Asciinema Demo</h1>
             <a href="/">Home</a>
             <p />
 
-            <div>Asciinema playing a terminal session recorded on Ann's computer</div>
+            <div>A terminal session on my computer recorded using <a href='https://asciinema.org' target='new'>Asciinema</a> and now playing with Asciinema player</div>
+            <p />
 
-            <div style={{ width: '928px', height: '670px' }}>
-                <div id="demo"></div>
-            </div>
+            <div id='my-player' style={{ width: '928px', height: '670px' }}></div>
+
+            <Keystrokes />
         </>
     );
 };
