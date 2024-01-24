@@ -27,7 +27,6 @@ export default function MovieMosaic() {
         return fetch(url, options)
             .then(res => res.json())
             .then(json => {
-                // console.log(json);
                 setCurrentPageNumber(json['page']);
                 setTotalPages(json['total_pages']);
                 const movies = json['results'];
