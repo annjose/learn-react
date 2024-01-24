@@ -51,11 +51,9 @@ const HelixTutor = () => {
     }, []);
 
     const KeystrokesPanel = () => {
-        console.log(`keystrokes=${keystrokes}`);
-
         return (
             <>
-                <h2>Keystrokes</h2>
+                <h3>Keystrokes</h3>
                 <ul>
                     {keystrokes.map((keystroke) => (
                         <li>{keystroke}</li>
@@ -68,10 +66,13 @@ const HelixTutor = () => {
 
     const Challenge = ({ challenge }) => {
         return (
-hello
+            <>
+                <h3>Challenge #{challenge.number}</h3>
+                <div>{challenge.title}</div>
+                <p/>
+            </>
         );
-        ;
-    }
+    };
 
     return (
         <>
@@ -79,8 +80,7 @@ hello
             <a href="/">Home</a>
             <p />
 
-            <h3>Challenge #{currentChallenge.number}</h3>
-            <div>{currentChallenge.title}</div>
+            <Challenge challenge={currentChallenge}/>
 
             <div id='ch-player' style={{ width: '928px', height: '670px' }}></div>
 
