@@ -56,7 +56,7 @@ const HelixTutor = () => {
                 <h3>Keystrokes</h3>
                 <ul>
                     {keystrokes.map((keystroke) => (
-                        <li>{keystroke}</li>
+                        <li>{keystroke.replace(/\"/g, "")}</li>
                     ))}
                 </ul>
             </>
@@ -69,9 +69,36 @@ const HelixTutor = () => {
             <>
                 <h3>Challenge #{challenge.number}</h3>
                 <div>{challenge.title}</div>
-                <p/>
+                <p />
             </>
         );
+    };
+
+    const Commands = () => {
+        let commands = [];
+        let tempCommand = '';
+        keystrokes.map((keystroke) => {
+            keystroke = keystroke.replace(/\"/g, "");
+            // if (keystroke == '\"\\r\"') {
+            if (keystroke == '\\r') {
+                console.log(`found command: ${tempCommand}`);
+                commands.push(tempCommand);
+                tempCommand = '';
+            } else {
+                tempCommand += keystroke;
+            }
+        });
+
+        return (
+            <>
+                <h3>Commands</h3>
+                <ul>
+                    {commands.map((command) => (
+                        <li><pre>{command}</pre></li>
+                    ))}
+                </ul>
+            </>
+        )
     };
 
     return (
@@ -80,10 +107,11 @@ const HelixTutor = () => {
             <a href="/">Home</a>
             <p />
 
-            <Challenge challenge={currentChallenge}/>
+            <Challenge challenge={currentChallenge} />
 
             <div id='ch-player' style={{ width: '928px', height: '670px' }}></div>
 
+            <Commands />
             <KeystrokesPanel />
         </>
     );
