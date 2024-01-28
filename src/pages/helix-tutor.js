@@ -112,7 +112,9 @@ const HelixTutor = () => {
                 <h3>Keystrokes</h3>
                 <ul>
                     {keystrokes.map((keystroke, index) => (
-                        <span style={{marginRight: '8px'}}>{keystroke.replace(/\"/g, "")}</span>
+                        <li key={index}>
+                            <span style={{ marginRight: '8px' }}>{keystroke.replace(/\"/g, "")}</span>
+                        </li>
                     ))}
                 </ul>
             </>
